@@ -1,11 +1,14 @@
 const projects = [];
+let hueIndex = 0;
 
 const createProject = (title) => {
-  const _id = crypto.randomUUID();
+  const _id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
   const getProjectId = () => _id;
   let _title = title || "Untitled";
   const getProjectTitle = () => _title;
-
+  const _color = `hsl(${hueIndex * 30}, 60%, 70%)`;
+  hueIndex++;
+  const getColor = () => _color;
   const setProjectTitle = (newTitle) => {
     _title = newTitle.trim() || "Untitled";
   };
@@ -20,7 +23,14 @@ const createProject = (title) => {
 
   const getTodos = () => toDos;
 
-  return { getProjectId, getProjectTitle, setProjectTitle, addToDo, getTodos };
+  return {
+    getColor,
+    getProjectId,
+    getProjectTitle,
+    setProjectTitle,
+    addToDo,
+    getTodos,
+  };
 };
 
 const deleteProject = (projectId) => {
@@ -31,7 +41,7 @@ const deleteProject = (projectId) => {
 };
 
 const createTodo = (title, date, priority, notes) => {
-  const _id = crypto.randomUUID();
+  const _id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
   const getTodoId = () => _id;
   let _title = title || "Untitled";
   const getTitle = () => _title;

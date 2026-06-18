@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "Bricolage Grotesque";
+    src: url("./assets/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.ttf") format("truetype");
+}
+
+@font-face{
+    font-family: "Jakarta Sans";
+    src: url("./assets/PlusJakartaSans-Italic-VariableFont_wght.ttf") format("truetype");
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    font-family: "Jakarta Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Bricolage Grotesque";
+}
+
+.sidebar-container{
+    height: 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    /* background-color: green; */
+}
+
+.content-container{
+    height: 100%;
+    width: calc(100vw - 300px);
+   background: linear-gradient(45deg, #9de497, #ecae87);
+}
+
+.sidebar-container .title-container{
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-container .logo{   
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
+}
+
+.sidebar-container .header-description{
+    color: rgb(185, 185, 185);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.sidebar-container .tab-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
+
+.sidebar-container .tab_{
+    display: flex;
+    align-items: center;
+}
