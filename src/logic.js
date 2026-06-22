@@ -60,4 +60,38 @@ const createTodo = (title, date, priority, notes) => {
   };
 };
 
-export { projects, createProject, createTodo };
+const saveToStorage = () => {
+  const data = projects.map((project) => ({
+    title: project.getProjectTitle(),
+    color: project.getColor(),
+    todos: project.getTodos().map((todo) => ({
+      id: todo.getTodoId(),
+      title: todo.getTitle(),
+      date: todo.getDate(),
+      priority: todo.getPriority(),
+      notes: todo.getNotes(),
+      completed: todo.getCompleted(),
+    })),
+  }));
+  localStorage.setItem("todoData", JSON.stringify(data));
+};
+
+const loadFromStorage = () => {
+  const saved = localStorage.getItem("todoData");
+  if (!saved) return null;
+
+  const data = JSON.parse(saved);
+  projects.length = 0;
+  hueIndex = data.length;
+  data.forEach((d) => {
+    const project = createProject(d.title);
+    d.todos.forEach((t) => {
+      const todo = createTodo(t.title, t.date, t.priority, t.notes);
+      todo.setCompleted(t.completed);
+      project.addToDo(todo);
+    });
+    projects.push(project);
+  });
+  return projects[0];
+};
+export { projects, createProject, createTodo, saveToStorage, loadFromStorage };

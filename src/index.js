@@ -1,71 +1,79 @@
 import "./styles.css";
 import createSidebar from "./sidebar.js";
 import createMain from "./main.js";
-import { projects, createProject, createTodo } from "./logic.js";
+import {
+  projects,
+  createProject,
+  createTodo,
+  saveToStorage,
+  loadFromStorage,
+} from "./logic.js";
 
-const dummyProjects = [
-  {
-    name: "Inbox",
-    todos: [
-      {
-        title: "Welcome! Click a task to expand and edit it",
-        priority: "high",
-        date: "2024-12-01",
-        notes:
-          "Every todo can hold notes, a due date and a priority. Try editing this one.",
-        done: false,
-      },
-      {
-        title: "Add a new task using the bar above",
-        priority: "medium",
-        notes: "",
-        done: false,
-      },
-      {
-        title: "Create a project in the sidebar →",
-        priority: "low",
-        notes: "",
-        done: false,
-      },
-      {
-        title: "Check something off",
-        priority: "medium",
-        notes: "",
-        done: true,
-      },
-    ],
-  },
-  {
-    name: "Work",
-    todos: [
-      {
-        title: "Finalise Q3 roadmap",
-        priority: "high",
-        notes: "",
-        done: false,
-      },
-      {
-        title: "Review design handoff",
-        priority: "medium",
-        notes: "",
-        done: false,
-      },
-    ],
-  },
-];
-
-dummyProjects.forEach((d) => {
-  const project = createProject(d.name);
-  d.todos.forEach((t) => {
-    const todo = createTodo(t.title, t.date, t.priority, t.notes);
-    todo.setCompleted(t.done);
-    project.addToDo(todo);
-  });
-  projects.push(project);
-});
-
-let currentProject = projects[0];
+let currentProject = loadFromStorage();
 let prevProgressPct = 0;
+
+if (!currentProject) {
+  const dummyProjects = [
+    {
+      name: "Inbox",
+      todos: [
+        {
+          title: "Welcome! Click a task to expand and edit it",
+          priority: "high",
+          date: "2024-12-01",
+          notes:
+            "Every todo can hold notes, a due date and a priority. Try editing this one.",
+          done: false,
+        },
+        {
+          title: "Add a new task using the bar above",
+          priority: "medium",
+          notes: "",
+          done: false,
+        },
+        {
+          title: "Create a project in the sidebar →",
+          priority: "low",
+          notes: "",
+          done: false,
+        },
+        {
+          title: "Check something off",
+          priority: "medium",
+          notes: "",
+          done: true,
+        },
+      ],
+    },
+    {
+      name: "Work",
+      todos: [
+        {
+          title: "Finalise Q3 roadmap",
+          priority: "high",
+          notes: "",
+          done: false,
+        },
+        {
+          title: "Review design handoff",
+          priority: "medium",
+          notes: "",
+          done: false,
+        },
+      ],
+    },
+  ];
+  dummyProjects.forEach((d) => {
+    const project = createProject(d.name);
+    d.todos.forEach((t) => {
+      const todo = createTodo(t.title, t.date, t.priority, t.notes);
+      todo.setCompleted(t.done);
+      project.addToDo(todo);
+    });
+    projects.push(project);
+  });
+  currentProject = projects[0];
+}
 
 const getProgressPct = () => {
   const todos = currentProject.getTodos();
@@ -108,6 +116,7 @@ const render = () => {
   );
   container.appendChild(createMain(projects, currentProject, render));
   animateProgressBar();
+  saveToStorage();
 };
 
 render();
