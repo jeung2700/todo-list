@@ -2,62 +2,62 @@ const projects = [];
 let hueIndex = 0;
 
 const createProject = (title) => {
-  const _id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
-  const getProjectId = () => _id;
-  let _title = title || "Untitled";
-  const getProjectTitle = () => _title;
-  const _color = `hsl(${hueIndex * 30}, 60%, 70%)`;
+  const id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
+  let name = title || "Untitled";
+  const color = `hsl(${hueIndex * 30}, 60%, 70%)`;
   hueIndex++;
-  const getColor = () => _color;
-  const setProjectTitle = (newTitle) => {
-    _title = newTitle.trim() || "Untitled";
-  };
-  let toDos = [];
-  const addToDo = (toDo) => {
-    toDos.push(toDo);
-  };
-  const deleteTodo = (toDoId) => {
-    const index = toDos.findIndex((toDo) => toDo.getTodoId() === toDoId);
-    if (index !== -1) toDos.splice(index, 1);
-  };
-
-  const getTodos = () => toDos;
+  const todos = [];
 
   return {
-    getColor,
-    getProjectId,
-    getProjectTitle,
-    setProjectTitle,
-    addToDo,
-    getTodos,
+    getProjectId: () => id,
+    getProjectTitle: () => name,
+    setProjectTitle: (t) => {
+      name = t.trim() || "Untitled";
+    },
+    getColor: () => color,
+    addToDo: (todo) => todos.push(todo),
+    deleteTodo: (todoId) => {
+      const i = todos.findIndex((t) => t.getTodoId() === todoId);
+      if (i !== -1) todos.splice(i, 1);
+    },
+    getTodos: () => todos,
   };
-};
-
-const deleteProject = (projectId) => {
-  const index = projects.findIndex(
-    (project) => project.getProjectId() === projectId,
-  );
-  if (index !== -1) projects.splice(index, 1);
 };
 
 const createTodo = (title, date, priority, notes) => {
-  const _id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
-  const getTodoId = () => _id;
-  let _title = title || "Untitled";
-  const getTitle = () => _title;
-  const setTitle = (newTitle) => {
-    _title = newTitle.trim() || "Untitled";
-  };
+  const id = crypto.getRandomValues(new Uint32Array(1))[0].toString();
+  let todoTitle = title || "Untitled";
+  let todoDate = date || null;
+  let todoPriority = priority || "low";
+  let todoNotes = notes || null;
+  let completed = false;
 
   return {
-    getTitle,
-    setTitle,
-    getTodoId,
-    date: date || null,
-    priority: priority || "low",
-    notes: notes || null,
-    completed: false,
+    getTodoId: () => id,
+    getTitle: () => todoTitle,
+    setTitle: (t) => {
+      todoTitle = t.trim() || "Untitled";
+    },
+    getDate: () => todoDate,
+    setDate: (d) => {
+      todoDate = d;
+    },
+    getPriority: () => todoPriority,
+    setPriority: (p) => {
+      todoPriority = p;
+    },
+    getNotes: () => todoNotes,
+    setNotes: (n) => {
+      todoNotes = n;
+    },
+    getCompleted: () => completed,
+    setCompleted: (v) => {
+      completed = v;
+    },
+    toggleCompleted: () => {
+      completed = !completed;
+    },
   };
 };
 
-export { projects, createProject, deleteProject, createTodo };
+export { projects, createProject, createTodo };

@@ -5,7 +5,7 @@
 
 @font-face{
     font-family: "Jakarta Sans";
-    src: url("./assets/PlusJakartaSans-Italic-VariableFont_wght.ttf") format("truetype");
+    src: url("./assets/PlusJakartaSans-VariableFont_wght.ttf") format("truetype");
 }
 
 *,
@@ -22,8 +22,19 @@
     font-family: "Jakarta Sans", sans-serif;
 }
 
+.main-container{
+    height: 100%;
+    overflow-y: auto;
+    width: calc(100vw - 300px);
+    background: linear-gradient(45deg, #e8f9e6, #faece3);
+    display: flex;
+    justify-content: center;
+    padding: 70px 0px 0px 0px;
+    scrollbar-gutter: stable;
+}
+
 h1, h2, h3, h4, h5, h6{
-    font-family: "Bricolage Grotesque";
+    font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .sidebar-container{
@@ -33,14 +44,8 @@ h1, h2, h3, h4, h5, h6{
     flex-direction: column;
     gap: 30px;
     padding: 30px;
-    /* background-color: green; */
 }
 
-.content-container{
-    height: 100%;
-    width: calc(100vw - 300px);
-   background: linear-gradient(45deg, #9de497, #ecae87);
-}
 
 .sidebar-container .title-container{
     display:flex;
@@ -54,21 +59,467 @@ h1, h2, h3, h4, h5, h6{
     width: 30px;
 }
 
+.main-container .date-display, 
 .sidebar-container .header-description{
-    color: rgb(185, 185, 185);
+    color: rgb(151, 151, 151);
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .sidebar-container .tab-container{
     display: flex;
     flex-direction: column;
+    gap: 5px;
+}
+
+.sidebar-container .project-tab{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
     padding: 10px;
+}
+
+.sidebar-container .tab-color{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
+.sidebar-container .tab-project-name{
+    font-weight: 700;
+}
+
+.sidebar-container .add-project-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgb(185, 185, 185);
+    gap: 8px;
+}
+
+.sidebar-container .add-project-text{
+    gap: 10px;
+    font-weight: 700;
+    color: grey;
+}
+
+.sidebar-container .project-tab--selected{
+   background: linear-gradient(45deg, #d4f0d2, #e8d1c2);
+}
+
+
+.sidebar-container .input{
+    width: 100%;
+    font-family: inherit;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #688f65;
+}
+
+.sidebar-container .btn-div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.sidebar-container .add-btn, 
+.sidebar-container .cancel-btn{
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+
+.sidebar-container .add-btn{
+    flex: 2; 
+    background-color: #688f65;
+    color: white;
+} 
+
+.sidebar-container .cancel-btn{
+    flex: 1;
+}
+
+.main-container .content-container{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    min-height: 100%;
+    padding-bottom: 70px;
+}
+
+.main-container .title-container{
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-.sidebar-container .tab_{
+.title-container h1{
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+.main-container .title-color{
+    height: 15px;
+    width: 15px;
+   border-radius: 50%;
+}
+
+.main-container .progress-text-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px 10px 0px;
+}
+
+.main-container .progress-text{
+    font-weight: 600;
+    color:rgb(103, 103, 103);
+    font-size: 0.9rem;
+}
+
+.main-container .progress-percentage{
+    font-family:"Bricolage Grotesque", sans-serif;
+    font-weight: 800;
+    color: #23a030;
+}
+
+.main-container .progress-bar-container {
+    width: 100%;
+    height: 14px;
+    min-height: 14px;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    overflow: hidden;
+}
+
+.main-container .progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #ffaa71, #97de9e);
+    transition: width 0.4s ease;
+}
+
+.main-container #project-form{
     display: flex;
     align-items: center;
+    width: 100%;
+    min-height: 70px;
+    border-radius: 10px;
+    margin: 30px 0 0 0;
+    padding: 10px 20px;
+    background-color: white;
+    font-family: inherit;
+    gap: 15px;
+    border: 1px solid #e0e0e0;
 }
+
+.main-container .title-input{
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    min-width: 300px;
+    background-color: white;
+    padding-right: 10px;
+}
+
+input:focus{    
+    outline: none;
+}
+
+.main-container .date-input{
+    height: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(103, 103, 103);
+    border: none;
+    background-color: #e0e0e0;
+}
+
+.main-container .prio-selection-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    gap: 5px;
+}
+
+.priority-btn {
+    cursor: pointer;
+}
+
+.priority-btn input[type="radio"] {
+    display: none;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    background-clip: content-box;
+}
+
+.priority-btn input[type="radio"]:checked + .color-dot {
+    border-color: #333;
+    padding: 3px;	
+}
+
+.main-container .add-project-button{
+    font-family: inherit;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff8d40;
+    color: white;
+    font-size: 1.1rem;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+#project-form:valid .add-project-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.main-container .todo-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.main-container .todo-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.main-container .todo-card--expanded {
+  overflow: visible;
+}
+
+
+.main-container .todo-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 6px;
+  border-radius: 0 3px 3px 0;
+  background-color: var(--prio-color, transparent);
+  z-index: 1;
+  transition: height 0.3s ease;
+}
+
+.main-container .todo-card--expanded::before {
+  height: 200px;
+}
+
+.main-container .todo-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  height: 70px;
+}
+
+.main-container .todo-expand-icon {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #999;
+  transition: transform 0.2s;
+}
+
+.main-container .todo-card--expanded .todo-expand-icon {
+  transform: rotate(180deg);
+}
+
+.main-container .todo-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 28px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.main-container .todo-card--expanded .todo-details {
+  max-height: 500px;
+  padding: 16px 28px 20px;
+}
+
+.main-container .todo-edit-label {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  color: rgb(151, 151, 151);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.main-container .todo-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.main-container .todo-edit-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.main-container .todo-edit-row > * {
+  flex: 1;
+}
+
+.main-container .todo-edit-input,
+.main-container .todo-edit-date,
+.main-container .todo-edit-notes {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+.main-container .todo-edit-date {
+  flex: 1;
+}
+
+.main-container .todo-edit-notes {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.main-container .todo-edit-prio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.main-container .todo-prio-text-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px solid;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.main-container .todo-prio-text-btn input[type="radio"] {
+  display: none;
+}
+
+.main-container .todo-prio-text-btn:has(input[type="radio"]:checked) {
+  border-color: #333 !important;
+  box-shadow: 0 0 0 1px #333;
+}
+
+.main-container .todo-action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  justify-content: space-between;
+}
+
+.main-container .todo-action-left {
+  display: flex;
+  gap: 8px;
+}
+
+.main-container .todo-save-btn,
+.main-container .todo-delete-btn {
+  font-family: inherit;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.main-container .todo-save-btn {
+  background-color: #ff8d40;
+  color: white;
+  border: none;
+}
+
+.main-container .todo-delete-btn {
+  background-color: white;
+  color: #f3675d;
+  border: 2px solid #f3675d;
+}
+
+.main-container .todo-save-btn:hover {
+  opacity: 0.85;
+}
+
+.main-container .todo-delete-btn:hover {
+  background-color: #fff5f5;
+}
+
+.main-container .todo-card input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.main-container .todo-card input[type="checkbox"]:checked {
+  background-color: #ff8d40;
+  border-color: #ff8d40;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: contain;
+}
+
+.main-container .todo-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.main-container .todo-card:has(input[type="checkbox"]:checked) .todo-title {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+
